@@ -53,15 +53,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
  Future<dynamic> fetchAlbum({String q="hello"}) async {
    Map<String,String> headers= {"Accept" : "application/json" };
-   String url = "https://www.googleapis.com/youtube/v3/search?key=AIzaSyDXaNnissZDd7d2p5j3kFMJjW6OOVl5MiA&part=snippet&maxResults=20&q="+q;
+   String url = "https://www.googleapis.com/youtube/v3/search?key=AIzaSyAqFWSGGglrKbLXGG2DTa-gwBUQRUz5kB4&part=snippet&maxResults=20&q="+q;
    final response = await http.get(Uri.encodeFull(url),headers : headers );
 
-   Fluttertoast.showToast(msg: response.body.toString() );
+ //  Fluttertoast.showToast(msg: response.body.toString() );
    if (response.statusCode == 200) {
      // If the server did return a 200 OK response,
      // then parse the JSON.
      var map = json.decode(response.body);
      body = map["items"];
+     if(q.length==0)
+       {
+         body=null;
+         setState(() {
+
+         });
+       }
      setState(() {
      //  Fluttertoast.showToast(msg: body.toString() );
      });
@@ -82,17 +89,18 @@ class _MyHomePageState extends State<MyHomePage> {
        children: <Widget>[
          TextField(textAlign: TextAlign.left,decoration: InputDecoration(hintText: "Youtube Search"),onChanged :(text)
          {
-if(text.length==0)
-  {
-    body=null;
-    setState(() {
-
-    });
-  }
-else {
+//if(text.length==0)
+//  {
+//    body=null;
+//    setState(() {
+//
+//    });
+//  }
+//else {
   body=null;
   fetchAlbum(q: text);
-}  }
+//         }
+         }
          ,)
          , Expanded (
    child : ListView.builder(
@@ -116,10 +124,10 @@ else {
      child : ListTile(
        leading:ConstrainedBox(
          constraints: BoxConstraints(
-           minWidth: 44,
-           minHeight: 44,
-           maxWidth: 64,
-           maxHeight: 64,
+           minWidth: 84,
+           minHeight: 84,
+           maxWidth: 164,
+           maxHeight: 164,
          ),
          child: Image.network(j["snippet"]["thumbnails"]["high"]["url"]),
        ),
