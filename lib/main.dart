@@ -34,7 +34,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
  var body;
-  String url = "https://www.googleapis.com/youtube/v3/search?key=AIzaSyBFuaFFIinWH1OgbcJfdYHum5vTazioj7M&part=snippet&maxResults=20";
+  String url = "https://www.googleapis.com/youtube/v3/search?key=?&part=snippet&maxResults=20";
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
  Future<dynamic> fetchAlbum({String q="hello"}) async {
    Map<String,String> headers= {"Accept" : "application/json" };
-   String url = "https://www.googleapis.com/youtube/v3/search?key=AIzaSyAqFWSGGglrKbLXGG2DTa-gwBUQRUz5kB4&part=snippet&maxResults=20&q="+q;
+   String url = "https://www.googleapis.com/youtube/v3/search?key=?&part=snippet&maxResults=20&q="+q;
    final response = await http.get(Uri.encodeFull(url),headers : headers );
 
  //  Fluttertoast.showToast(msg: response.body.toString() );
